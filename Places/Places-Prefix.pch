@@ -1,0 +1,51 @@
+//
+// Prefix header for all source files of the 'Places' target in the 'Places' project
+//
+
+#import <Availability.h>
+
+#ifndef __IPHONE_3_0
+#warning "This project uses features only available in iOS SDK 3.0 and later."
+#endif
+
+#ifdef __OBJC__
+#import <UIKit/UIKit.h>
+#import <Foundation/Foundation.h>
+
+#import <QuartzCore/QuartzCore.h>
+
+#import "AppDelegate.h"
+
+#import <CoreData/CoreData.h>
+#import "CoreDataManager.h"
+
+#import "SBJson.h"
+
+#endif
+
+#define APP_DELEGATE ((AppDelegate *)[[UIApplication sharedApplication] delegate])
+#define RGBA(r,g,b,a) [UIColor colorWithRed: r / 255.0f green: g / 255.0f blue: b / 255.0f alpha: a]
+#define RETINA ([UIScreen instancesRespondToSelector:@selector(scale)] ? ([[UIScreen mainScreen] scale] > 1.1 ? YES : NO) : NO)
+#define IOS_LOWER_THAN(VERSION) ([[UIDevice currentDevice].systemVersion floatValue] < VERSION)
+
+
+#ifdef __DEBUG_MODE
+#define DLog(fmt, ...) NSLog((@"[%@|%@] " fmt), NSStringFromClass([self class]), NSStringFromSelector(_cmd), ##__VA_ARGS__)
+#else
+#define DLog(...)
+#define NSLog(...)
+#endif
+
+#define y_offset(r) (r.frame.origin.y+r.frame.size.height)
+#define x_offset(r) (r.frame.origin.x+r.frame.size.width)
+
+#define SAFE_KILL(a) if(a){[a release]; a=nil;}
+
+#define REACHABILITY_HOST @"google.com"
+
+#define MY_ALLERT(TITLE, MESSAGE) \
+[[[[UIAlertView alloc] initWithTitle:TITLE \
+message:MESSAGE \
+delegate:nil \
+cancelButtonTitle:@"OK" \
+otherButtonTitles:nil] autorelease] show]
